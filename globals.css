@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Design tokens ─────────────────────────────────────────────────────────── */
+:root {
+  --bg:             #FAFBFF;
+  --navy:           #0A1628;
+  --navy-light:     #122040;
+  --blue:           #2563EB;
+  --blue-light:     #EFF6FF;
+  --cyan:           #0EA5E9;
+  --border:         #E2EAF6;
+  --text-muted:     #6B7FA3;
+  --card:           #FFFFFF;
+  --success:        #059669;
+  --warning:        #D97706;
+  --danger:         #DC2626;
+  --radius-card:    1rem;
+}
+
+/* ── Base ──────────────────────────────────────────────────────────────────── */
+html {
+  font-family: 'Figtree', system-ui, sans-serif;
+  background-color: var(--bg);
+  color: var(--navy);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100dvh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Syne', system-ui, sans-serif;
+}
+
+/* ── Utility classes ───────────────────────────────────────────────────────── */
+@layer components {
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3.5
+           bg-brand-600 hover:bg-brand-700 active:bg-brand-800
+           text-white font-semibold text-sm rounded-xl
+           transition-all duration-200 shadow-md hover:shadow-glow
+           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3.5
+           bg-white hover:bg-slate-50 active:bg-slate-100
+           text-navy border border-[var(--border)]
+           font-semibold text-sm rounded-xl
+           transition-all duration-200
+           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2.5
+           text-[var(--text-muted)] hover:text-navy hover:bg-slate-100
+           font-medium text-sm rounded-lg transition-all duration-150;
+  }
+
+  .card {
+    @apply bg-white rounded-2xl border border-[var(--border)] shadow-card;
+  }
+
+  .card-lg {
+    @apply bg-white rounded-3xl border border-[var(--border)] shadow-card-lg;
+  }
+
+  .label-tag {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1
+           text-xs font-semibold rounded-full tracking-wide uppercase;
+  }
+
+  .disclaimer-box {
+    @apply bg-amber-50 border border-amber-200 rounded-xl p-4
+           text-amber-800 text-xs leading-relaxed;
+  }
+
+  .metric-row {
+    @apply flex items-center justify-between py-3 border-b border-[var(--border)] last:border-0;
+  }
+
+  /* Animated dot grid background */
+  .dot-bg {
+    background-image: radial-gradient(circle, #CBD5E1 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+}
+
+/* ── Fade-up stagger helpers ───────────────────────────────────────────────── */
+.stagger-1 { animation-delay: 0.05s; }
+.stagger-2 { animation-delay: 0.10s; }
+.stagger-3 { animation-delay: 0.18s; }
+.stagger-4 { animation-delay: 0.26s; }
+.stagger-5 { animation-delay: 0.34s; }
+.stagger-6 { animation-delay: 0.42s; }
+
+/* ── Risk-level colours ────────────────────────────────────────────────────── */
+.risk-low {
+  --risk-color:    var(--success);
+  --risk-bg:       #ECFDF5;
+  --risk-border:   #A7F3D0;
+}
+.risk-moderate {
+  --risk-color:    var(--warning);
+  --risk-bg:       #FFFBEB;
+  --risk-border:   #FDE68A;
+}
+.risk-high {
+  --risk-color:    var(--danger);
+  --risk-bg:       #FEF2F2;
+  --risk-border:   #FECACA;
+}
+
+/* ── Canvas overlay animation ──────────────────────────────────────────────── */
+@keyframes drawLine {
+  from { stroke-dashoffset: 1000; }
+  to   { stroke-dashoffset: 0; }
+}
+
+/* ── Print styles (for report) ─────────────────────────────────────────────── */
+@media print {
+  body { background: white; }
+  .no-print { display: none !important; }
+  .print-card { box-shadow: none; border: 1px solid #e5e7eb; }
+}
+
+/* ── Scrollbar (subtle) ────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 3px; }
